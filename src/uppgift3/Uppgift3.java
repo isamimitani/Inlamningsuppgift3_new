@@ -3,7 +3,7 @@ package uppgift3;
 
 /**
  *
- * @author isami
+ * @author julia
  */
 public class Uppgift3 {
 
@@ -11,6 +11,7 @@ public class Uppgift3 {
      * @param args the command line arguments  
      */
     public static void main(String[] args) {
+        BildSpel bs = new BildSpel();
         
     }
 
