@@ -3,11 +3,15 @@
  */
 package uppgift3;
 
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import static java.awt.Image.SCALE_SMOOTH;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,8 +25,9 @@ import javax.swing.JPanel;
  */
 public class BildSpel extends JFrame implements ActionListener{
     JFrame f = new JFrame();
-    JPanel pnum = new JPanel();
+    JPanel pagain = new JPanel();
     JPanel pimg = new JPanel();
+    JPanel ptogether = new JPanel();
     
     ImageIcon imgsrc1 = new ImageIcon("src\\imgs\\num1.jpg");
     int himg = 200;
@@ -91,11 +96,7 @@ public class BildSpel extends JFrame implements ActionListener{
     Image im16 = imgsrc16.getImage();
     Image imnew16 = im16.getScaledInstance(wimg, himg, SCALE_SMOOTH);
     ImageIcon img16 = new ImageIcon(imnew16);
-    
-    JLabel number1 = new JLabel("1");
-    JLabel number2 = new JLabel("2");
-    JLabel number3 = new JLabel("3");
-    
+        
     JButton pic1 = new JButton(img1);
     JButton pic2 = new JButton(img2);
     JButton pic3 = new JButton(img3);
@@ -112,53 +113,40 @@ public class BildSpel extends JFrame implements ActionListener{
     JButton pic14 = new JButton(img14);
     JButton pic15 = new JButton(img15);
     JButton pic16 = new JButton(img16);
+    JButton testpic = new JButton(" ");
+    JButton again = new JButton("Once again!");
+    
     
     JButton[] allButton = {pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8, pic9,
-        pic10, pic11, pic12, pic13, pic14, pic15, pic16};
+        pic10, pic11, pic12, pic13, pic14, pic15, pic16, testpic};
+    ImageIcon[] bilder = {img1, img2, img3, img4, img5, img6, img7, img8, img9,
+        img10, img11, img12, img13, img14, img15, img16};
     
     
-    
+    public void bland(){
+        
+        Random ran = new Random();
+        for(int j=0; j<16; j++){
+            int rannum = ran.nextInt(16);
+            if(j == rannum)
+                continue;
+            allButton[16] = allButton[j];
+            allButton[j] = allButton[rannum];
+            allButton[rannum] = allButton[16];
+        }
+        for(int k =0; k<16; k++){
+            pimg.add(allButton[k]);
+        }
+    }
     BildSpel(){
-        
-        
-        pnum.setLayout(new GridLayout(1, 3));
-        pnum.add(number1);
-        pnum.add(number2);
-        pnum.add(number3);
-        
+
+        bland();
         pimg.setLayout(new GridLayout(4, 4));
-        pimg.add(pic1);
-        pimg.add(pic2);
-        pimg.add(pic3);
-        pimg.add(pic4);
-        pimg.add(pic5);
-        pimg.add(pic6);
-        pimg.add(pic7);
-        pimg.add(pic8);
-        pimg.add(pic9);
-        pimg.add(pic10);
-        pimg.add(pic11);
-        pimg.add(pic12);
-        pimg.add(pic13);
-        pimg.add(pic14);
-        pimg.add(pic15);
-        pimg.add(pic16);
-        pic1.addActionListener(this);
-        pic2.addActionListener(this);
-        pic3.addActionListener(this);
-        pic4.addActionListener(this);
-        pic5.addActionListener(this);
-        pic6.addActionListener(this);
-        pic7.addActionListener(this);
-        pic8.addActionListener(this);
-        pic9.addActionListener(this);
-        pic10.addActionListener(this);
-        pic11.addActionListener(this);
-        pic12.addActionListener(this);
-        pic13.addActionListener(this);
-        pic14.addActionListener(this);
-        pic15.addActionListener(this);
-        pic16.addActionListener(this);
+        pagain.setLayout(new FlowLayout());
+        pagain.add(again);
+        ptogether.setLayout(new BorderLayout());
+        ptogether.add(pagain, BorderLayout.WEST);
+        ptogether.add(pimg, BorderLayout.CENTER);
         pimg.getComponent(0).setName("11");
         pimg.getComponent(1).setName("12");
         pimg.getComponent(2).setName("13");
@@ -175,10 +163,29 @@ public class BildSpel extends JFrame implements ActionListener{
         pimg.getComponent(13).setName("42");
         pimg.getComponent(14).setName("43");
         pimg.getComponent(15).setName("44");
+        pagain.getComponent(0).setName("99");
+        
+        
+        again.addActionListener(this);
+        pic1.addActionListener(this);
+        pic2.addActionListener(this);
+        pic3.addActionListener(this);
+        pic4.addActionListener(this);
+        pic5.addActionListener(this);
+        pic6.addActionListener(this);
+        pic7.addActionListener(this);
+        pic8.addActionListener(this);
+        pic9.addActionListener(this);
+        pic10.addActionListener(this);
+        pic11.addActionListener(this);
+        pic12.addActionListener(this);
+        pic13.addActionListener(this);
+        pic14.addActionListener(this);
+        pic15.addActionListener(this);
+        pic16.addActionListener(this);
 
 
-//        pimg.add(pnum);
-        f.add(pimg);
+        f.add(ptogether);
         f.pack();
         f.setLocation(600, 200);
         f.setVisible(true);
@@ -195,64 +202,82 @@ public class BildSpel extends JFrame implements ActionListener{
         int ner=0;
         int left=0;
         int right=0;
-        for(int i=0; i<16; i++){
-            if((allButton[i].getIcon().toString()).equals(img16.toString())){
-                m = Integer.parseInt(allButton[i].getName());
-                upp = m - 10;
-                ner = m + 10;
-                left = m - 1;
-                right = m + 1;
-                if(allButton[i].getName().startsWith("4")){
-                    if(n==left || n==right){
-                        allButton[i].setIcon(allButton[n-29].getIcon());
-                        allButton[n-29].setIcon(img16);
+            int y= 0;
+        for(int r=0; r<16; r++){
+
+            if((allButton[r].getIcon().toString()).equals(bilder[r].toString())){
+                y++;
+            }
+                
+            if(y==16){
+                System.out.println("YOU WIN!!!");
+                System.exit(0);
+            }
+
+            
+        }
+        if(n<50){
+            for(int i=0; i<16; i++){
+                if((allButton[i].getIcon().toString()).equals(img16.toString())){
+                    m = Integer.parseInt(allButton[i].getName());
+                    upp = m - 10;
+                    ner = m + 10;
+                    left = m - 1;
+                    right = m + 1;
+                    if(allButton[i].getName().startsWith("4")){
+                        if(n==left || n==right){
+                            allButton[i].setIcon(allButton[n-29].getIcon());
+                            allButton[n-29].setIcon(img16);
+                        }
+                        if(n==upp){
+                            allButton[i].setIcon(allButton[n-23].getIcon());
+                            allButton[n-23].setIcon(img16);
+                        }
                     }
-                    if(n==upp){
-                        allButton[i].setIcon(allButton[n-23].getIcon());
-                        allButton[n-23].setIcon(img16);
+                    if(allButton[i].getName().startsWith("3")){
+                        if(n==left || n==right){
+                            allButton[i].setIcon(allButton[n-23].getIcon());
+                            allButton[n-23].setIcon(img16);
+                        }
+                        if(n==upp){
+                            allButton[i].setIcon(allButton[n-17].getIcon());
+                            allButton[n-17].setIcon(img16);
+                        }
+                        if(n==ner){
+                            allButton[i].setIcon(allButton[n-29].getIcon());
+                            allButton[n-29].setIcon(img16);
+                        }
                     }
-                }
-                if(allButton[i].getName().startsWith("3")){
-                    if(n==left || n==right){
-                        allButton[i].setIcon(allButton[n-23].getIcon());
-                        allButton[n-23].setIcon(img16);
+                    if(allButton[i].getName().startsWith("2")){
+                        if(n==left || n==right){
+                            allButton[i].setIcon(allButton[n-17].getIcon());
+                            allButton[n-17].setIcon(img16);
+                        }
+                        if(n==upp){
+                            allButton[i].setIcon(allButton[n-11].getIcon());
+                            allButton[n-11].setIcon(img16);
+                        }
+                        if(n==ner){
+                            allButton[i].setIcon(allButton[n-23].getIcon());
+                            allButton[n-23].setIcon(img16);
+                        }
                     }
-                    if(n==upp){
-                        allButton[i].setIcon(allButton[n-17].getIcon());
-                        allButton[n-17].setIcon(img16);
-                    }
-                    if(n==ner){
-                        allButton[i].setIcon(allButton[n-29].getIcon());
-                        allButton[n-29].setIcon(img16);
-                    }
-                }
-                if(allButton[i].getName().startsWith("2")){
-                    if(n==left || n==right){
-                        allButton[i].setIcon(allButton[n-17].getIcon());
-                        allButton[n-17].setIcon(img16);
-                    }
-                    if(n==upp){
-                        allButton[i].setIcon(allButton[n-11].getIcon());
-                        allButton[n-11].setIcon(img16);
-                    }
-                    if(n==ner){
-                        allButton[i].setIcon(allButton[n-23].getIcon());
-                        allButton[n-23].setIcon(img16);
-                    }
-                }
-                if(allButton[i].getName().startsWith("1")){
-                    if(n==left || n==right){
-                        allButton[i].setIcon(allButton[n-11].getIcon());
-                        allButton[n-11].setIcon(img16);
-                    }
-                    if(n==ner){
-                        allButton[i].setIcon(allButton[n-17].getIcon());
-                        allButton[n-17].setIcon(img16);
+                    if(allButton[i].getName().startsWith("1")){
+                        if(n==left || n==right){
+                            allButton[i].setIcon(allButton[n-11].getIcon());
+                            allButton[n-11].setIcon(img16);
+                        }
+                        if(n==ner){
+                            allButton[i].setIcon(allButton[n-17].getIcon());
+                            allButton[n-17].setIcon(img16);
+                        }
                     }
                 }
             }
         }
-    
+        if(n == 99){
+            new BildSpel();
+        }
     }
     
     
