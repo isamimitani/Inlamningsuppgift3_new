@@ -12,12 +12,14 @@ import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  *
@@ -28,14 +30,12 @@ public class BildSpel extends JFrame implements ActionListener{
     JPanel pagain = new JPanel();
     JPanel pimg = new JPanel();
     JPanel ptogether = new JPanel();
-    
     ImageIcon imgsrc1 = new ImageIcon("src\\imgs\\num1.jpg");
     int himg = 200;
     int wimg = 200;
     Image im1 = imgsrc1.getImage();
     Image imnew1 = im1.getScaledInstance(wimg, himg, SCALE_SMOOTH);
     ImageIcon img1 = new ImageIcon(imnew1);
-    
     ImageIcon imgsrc2 = new ImageIcon("src\\imgs\\num2.jpg");
     Image im2 = imgsrc2.getImage();
     Image imnew2 = im2.getScaledInstance(wimg, himg, SCALE_SMOOTH);
@@ -96,7 +96,7 @@ public class BildSpel extends JFrame implements ActionListener{
     Image im16 = imgsrc16.getImage();
     Image imnew16 = im16.getScaledInstance(wimg, himg, SCALE_SMOOTH);
     ImageIcon img16 = new ImageIcon(imnew16);
-        
+    ImageIcon testimg = new ImageIcon("");
     JButton pic1 = new JButton(img1);
     JButton pic2 = new JButton(img2);
     JButton pic3 = new JButton(img3);
@@ -113,33 +113,29 @@ public class BildSpel extends JFrame implements ActionListener{
     JButton pic14 = new JButton(img14);
     JButton pic15 = new JButton(img15);
     JButton pic16 = new JButton(img16);
-    JButton testpic = new JButton(" ");
+    JButton testpic = new JButton(testimg);
     JButton again = new JButton("Once again!");
-    
-    
     JButton[] allButton = {pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8, pic9,
         pic10, pic11, pic12, pic13, pic14, pic15, pic16, testpic};
     ImageIcon[] bilder = {img1, img2, img3, img4, img5, img6, img7, img8, img9,
-        img10, img11, img12, img13, img14, img15, img16};
-    
-    
+        img10, img11, img12, img13, img14, img15, img16, testimg};
     public void bland(){
-        
         Random ran = new Random();
         for(int j=0; j<16; j++){
             int rannum = ran.nextInt(16);
             if(j == rannum)
                 continue;
+            allButton[16] = testpic;
             allButton[16] = allButton[j];
             allButton[j] = allButton[rannum];
             allButton[rannum] = allButton[16];
+            allButton[16] = testpic;
         }
         for(int k =0; k<16; k++){
             pimg.add(allButton[k]);
         }
     }
     BildSpel(){
-
         bland();
         pimg.setLayout(new GridLayout(4, 4));
         pagain.setLayout(new FlowLayout());
@@ -163,9 +159,7 @@ public class BildSpel extends JFrame implements ActionListener{
         pimg.getComponent(13).setName("42");
         pimg.getComponent(14).setName("43");
         pimg.getComponent(15).setName("44");
-        pagain.getComponent(0).setName("99");
-        
-        
+        pagain.getComponent(0).setName("99");        
         again.addActionListener(this);
         pic1.addActionListener(this);
         pic2.addActionListener(this);
@@ -183,15 +177,12 @@ public class BildSpel extends JFrame implements ActionListener{
         pic14.addActionListener(this);
         pic15.addActionListener(this);
         pic16.addActionListener(this);
-
-
         f.add(ptogether);
         f.pack();
-        f.setLocation(600, 200);
+        f.setLocation(600, 50);
         f.setVisible(true);
         f.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         String s = e.getSource().toString();
@@ -202,19 +193,16 @@ public class BildSpel extends JFrame implements ActionListener{
         int ner=0;
         int left=0;
         int right=0;
-            int y= 0;
+        int y= 0;
         for(int r=0; r<16; r++){
-
             if((allButton[r].getIcon().toString()).equals(bilder[r].toString())){
                 y++;
             }
-                
-            if(y==16){
+            if(y==15){
                 System.out.println("YOU WIN!!!");
+                JOptionPane.showMessageDialog(null, "YOU WIN!!!!");
                 System.exit(0);
             }
-
-            
         }
         if(n<50){
             for(int i=0; i<16; i++){
@@ -276,11 +264,19 @@ public class BildSpel extends JFrame implements ActionListener{
             }
         }
         if(n == 99){
-            new BildSpel();
+            Random ran = new Random();
+            for(int j=0; j<16; j++){
+                int rannum = ran.nextInt(16);
+                if(j == rannum)
+                    continue;
+                allButton[16].setIcon(testimg);
+                allButton[16].setIcon(allButton[j].getIcon());
+                allButton[j].setIcon(allButton[rannum].getIcon());
+                allButton[rannum].setIcon(allButton[16].getIcon());
+                allButton[16].setIcon(testimg);
+            }  
         }
-    }
-    
-    
+    }    
 }
     
 
