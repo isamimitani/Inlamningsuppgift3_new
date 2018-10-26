@@ -4,12 +4,32 @@ import javax.swing.*;
 
 /**
  *Nu börjar jag seperat olika klasser
+ * Sen ska försöka använda CSS
  * @author julia
  */
 public class Uppgift3 {
     public Uppgift3(){
-
-        int row = Integer.parseInt(JOptionPane.showInputDialog("How many rows?"));
+        boolean again = true;
+        int row = 0;
+        String input = JOptionPane.showInputDialog("How many rows?(2-10)");
+        while(again){
+            try{
+                if(input==null || input.trim().equals(""))
+                    System.exit(0);
+                row = Integer.parseInt(input);
+                if(row>=2 && row<=10)
+                    again = false;
+                else{
+                    input = JOptionPane.showInputDialog("Write number 2 to 10 !");
+                    again = true;
+                }
+                    
+            }
+            catch(Exception exc){
+                input = JOptionPane.showInputDialog("Write number 2 to 10 !");
+                again = true;
+            }
+        }
         SpelCentral sc = new SpelCentral(row);
     }
         
