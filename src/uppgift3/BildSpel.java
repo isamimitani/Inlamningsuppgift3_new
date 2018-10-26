@@ -12,6 +12,7 @@ import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
+import java.util.Vector;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -30,6 +31,8 @@ public class BildSpel extends JFrame implements ActionListener{
     JPanel pagain = new JPanel();
     JPanel pimg = new JPanel();
     JPanel ptogether = new JPanel();
+//    Vector<String> imgcatch = new Vector<>();
+    
     ImageIcon imgsrc1 = new ImageIcon("src\\imgs\\num1.jpg");
     int himg = 200;
     int wimg = 200;
