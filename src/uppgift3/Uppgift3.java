@@ -3,7 +3,9 @@ package uppgift3;
 import javax.swing.*;
 
 /**
- *Nu börjar jag seperat olika klasser
+ *Nu kan nummer byta på rad
+ * win finns ett problem
+ * hur kan funkar for bild
  * Sen ska försöka använda CSS
  * @author julia
  */

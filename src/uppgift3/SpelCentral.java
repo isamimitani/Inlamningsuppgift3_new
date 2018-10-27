@@ -79,40 +79,58 @@ public class SpelCentral extends JFrame implements ActionListener{
                 for(int j=0; j<button.length; j++){
                     if(button[i][j].getText().equals("")){
                         m = Integer.parseInt(button[i][j].getName());
-                        left = m - 1;
-                        right = m + 1;
-                        if(n==left){
-                            button[i][j].setText(button[i][j-1].getText());
-                            button[i][j-1].setText("");
+                        left = Integer.parseInt(button[i][0].getName());
+                        right = Integer.parseInt(button[i][button.length-1].getName());
+                        while(n>=left && n<m){
+                            button[i][j].setText(button[i][--j].getText());
+                            button[i][j].setText("");
+                            n++;
                         }
-                        if(n==right){
-                            button[i][j].setText(button[i][j+1].getText());
-                            button[i][j+1].setText("");
+                        while(n>m && n<=right){
+                            button[i][j].setText(button[i][++j].getText());
+                            button[i][j].setText("");
+                            n--;
                         }
                         if(i>0 && i<button.length-1 && n!=left && n!=right){
-                            upp = Integer.parseInt(button[i-1][j].getName());
-                            ner = Integer.parseInt(button[i+1][j].getName());
-                            if(n==ner){
-                                button[i][j].setText(button[i+1][j].getText());
-                                button[i+1][j].setText("");
+                            for(int k=i+1; k<button.length; k++){
+                                ner=Integer.parseInt(button[k][j].getName()); 
+                                if(n==ner){
+                                    for(int p=i; p<k; p++){
+                                        button[p][j].setText(button[p+1][j].getText());
+                                        button[p+1][j].setText("");
+                                    }
+                                }
                             }
-                            if(n==upp){
-                                button[i][j].setText(button[i-1][j].getText());
-                                button[i-1][j].setText("");
+                            for(int k=i-1; k>=0; k--){
+                                upp=Integer.parseInt(button[k][j].getName()); 
+                                if(n==upp){
+                                    for(int p=i; p>k; p--){
+                                        button[p][j].setText(button[p-1][j].getText());
+                                        button[p-1][j].setText("");
+                                    }
+                                }
                             }
                         }
                         if(i==0 && n!=left && n!=right){
-                            ner = Integer.parseInt(button[i+1][j].getName());
-                            if(n==ner){
-                                button[i][j].setText(button[i+1][j].getText());
-                                button[i+1][j].setText("");
+                            for(int k=1; k<button.length; k++){
+                                ner=Integer.parseInt(button[k][j].getName()); 
+                                if(n==ner){
+                                    for(int p=0; p<k; p++){
+                                        button[p][j].setText(button[p+1][j].getText());
+                                        button[p+1][j].setText("");
+                                    }
+                                }
                             }
                         }
                         if(i==button.length-1 && n!=left && n!=right){
-                            upp = Integer.parseInt(button[i-1][j].getName());
-                            if(n==upp){
-                                button[i][j].setText(button[i-1][j].getText());
-                                button[i-1][j].setText("");
+                            for(int k=i-1; k>=0; k--){
+                                upp=Integer.parseInt(button[k][j].getName()); 
+                                if(n==upp){
+                                    for(int p=i; p>k; p--){
+                                        button[p][j].setText(button[p-1][j].getText());
+                                        button[p-1][j].setText("");
+                                    }
+                                }
                             }
                         }
                     }
