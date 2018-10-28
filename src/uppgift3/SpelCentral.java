@@ -40,8 +40,9 @@ public class SpelCentral extends JFrame implements ActionListener{
                 button[i][j].addActionListener(this);
             }
         }
-        bland.setName("999");
-        bland.addActionListener(this);
+        bland.addActionListener(onceagain ->{   //Lamda
+            ButtonSpel.blandB(button);
+        });
         pane.setPreferredSize(new Dimension(500, 500));
         totalP.add(pane, BorderLayout.CENTER);
         totalP.add(again, BorderLayout.WEST);
@@ -62,8 +63,6 @@ public class SpelCentral extends JFrame implements ActionListener{
         int ner=0;
         int left=0;
         int right=0;
-        int total= 0;
-        int number=0;
         if(n>=100 && n<500){
             for(int i=0; i<button.length; i++){
                 for(int j=0; j<button.length; j++){
@@ -107,9 +106,6 @@ public class SpelCentral extends JFrame implements ActionListener{
                 }
             }
         }
-        if(n==999){
-            ButtonSpel.blandB(button);        
-        }
-        ButtonSpel.winButton(button, number, total);          
+        ButtonSpel.winButton(button);          
     }
 }

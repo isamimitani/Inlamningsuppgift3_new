@@ -34,14 +34,7 @@ public class Uppgift3 {
         }
         SpelCentral sc = new SpelCentral(row);
     }
-        
-
-        
-
-    
     public static void main(String[] args) {
-//        BildSpel bs = new BildSpel();
         Uppgift3 play = new Uppgift3();
     }
-
 }
