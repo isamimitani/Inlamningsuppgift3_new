@@ -63,17 +63,6 @@ public class SpelCentral extends JFrame implements ActionListener{
         int right=0;
         int total= 0;
         int number=0;
-        for(int i=0; i<button.length; i++){
-            for(int j=0; j<button.length; j++){
-                number++;
-                String str = "" + number;
-                if(button[i][j].getText().equals(str))
-                    total++;
-            }
-            if(total == button.length*button.length -1){
-                JOptionPane.showMessageDialog(null, "YOU WIN!!!!");
-            }
-        }        
         if(n>=100 && n<500){
             for(int i=0; i<button.length; i++){
                 for(int j=0; j<button.length; j++){
@@ -91,7 +80,7 @@ public class SpelCentral extends JFrame implements ActionListener{
                             button[i][j].setText("");
                             n--;
                         }
-                        if(i>0 && i<button.length-1 && n!=left && n!=right){
+                        if(n>right){
                             for(int k=i+1; k<button.length; k++){
                                 ner=Integer.parseInt(button[k][j].getName()); 
                                 if(n==ner){
@@ -101,28 +90,8 @@ public class SpelCentral extends JFrame implements ActionListener{
                                     }
                                 }
                             }
-                            for(int k=i-1; k>=0; k--){
-                                upp=Integer.parseInt(button[k][j].getName()); 
-                                if(n==upp){
-                                    for(int p=i; p>k; p--){
-                                        button[p][j].setText(button[p-1][j].getText());
-                                        button[p-1][j].setText("");
-                                    }
-                                }
-                            }
                         }
-                        if(i==0 && n!=left && n!=right){
-                            for(int k=1; k<button.length; k++){
-                                ner=Integer.parseInt(button[k][j].getName()); 
-                                if(n==ner){
-                                    for(int p=0; p<k; p++){
-                                        button[p][j].setText(button[p+1][j].getText());
-                                        button[p+1][j].setText("");
-                                    }
-                                }
-                            }
-                        }
-                        if(i==button.length-1 && n!=left && n!=right){
+                        if(n<left){
                             for(int k=i-1; k>=0; k--){
                                 upp=Integer.parseInt(button[k][j].getName()); 
                                 if(n==upp){
@@ -140,5 +109,6 @@ public class SpelCentral extends JFrame implements ActionListener{
         if(n==999){
             ButtonSpel.blandB(button);        
         }
+        ButtonSpel.winButton(button, number, total);          
     }
 }

@@ -3,8 +3,8 @@ package uppgift3;
 import javax.swing.*;
 
 /**
- *Nu kan nummer byta på rad
- * win finns ett problem
+ *
+ * blanda first or you win first?
  * hur kan funkar for bild
  * Sen ska försöka använda CSS
  * @author julia

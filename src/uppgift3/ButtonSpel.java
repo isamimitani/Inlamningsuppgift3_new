@@ -27,20 +27,33 @@ public class ButtonSpel extends JFrame{
         return button;
     }
     public static void blandB(JButton[][] button){
-            Random rani = new Random();
-            Random ranj = new Random();
-            for(int i=0; i<button.length; i++){
-                int raninum = rani.nextInt(button.length);
-                for(int j=0; j<button.length; j++){
-                    int ranjnum = ranj.nextInt(button.length);
-                    if(i==raninum && j==ranjnum)
-                        continue;
-                    test.setText("test");
-                    test.setText(button[i][j].getText());
-                    button[i][j].setText(button[raninum][ranjnum].getText());
-                    button[raninum][ranjnum].setText(test.getText());
-                    test.setText("test");
-                }
-            }          
+        Random rani = new Random();
+        Random ranj = new Random();
+        for(int i=0; i<button.length; i++){
+            int raninum = rani.nextInt(button.length);
+            for(int j=0; j<button.length; j++){
+                int ranjnum = ranj.nextInt(button.length);
+                if(i==raninum && j==ranjnum)
+                    continue;
+                test.setText("test");
+                test.setText(button[i][j].getText());
+                button[i][j].setText(button[raninum][ranjnum].getText());
+                button[raninum][ranjnum].setText(test.getText());
+                test.setText("test");
+            }
+        }          
+    }
+    public static void winButton(JButton[][] button, int number, int total){
+        for(int i=0; i<button.length; i++){
+            for(int j=0; j<button.length; j++){
+                number++;
+                String str = "" + number;
+                if(button[i][j].getText().equals(str))
+                    total++;
+            }
+            if(total == button.length*button.length -1){
+                JOptionPane.showMessageDialog(null, "YOU WIN!!!!");
+            }
+        }           
     }
 }
