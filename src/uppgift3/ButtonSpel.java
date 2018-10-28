@@ -43,7 +43,9 @@ public class ButtonSpel extends JFrame{
             }
         }          
     }
-    public static void winButton(JButton[][] button, int number, int total){
+    public static void winButton(JButton[][] button){
+        int total= 0;
+        int number=0;        
         for(int i=0; i<button.length; i++){
             for(int j=0; j<button.length; j++){
                 number++;
