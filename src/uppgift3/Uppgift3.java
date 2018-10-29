@@ -4,7 +4,7 @@ import javax.swing.*;
 
 /**
  *
- * blanda first or you win first?
+ * 
  * hur kan funkar for bild
  * Sen ska försöka använda CSS
  * @author julia

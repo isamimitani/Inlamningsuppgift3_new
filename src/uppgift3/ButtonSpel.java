@@ -24,6 +24,7 @@ public class ButtonSpel extends JFrame{
                 button[i][j] = new JButton(ss);
             }
         }
+        button[n-1][n-1].setText("");        
         return button;
     }
     public static void blandB(JButton[][] button){
@@ -41,7 +42,10 @@ public class ButtonSpel extends JFrame{
                 button[raninum][ranjnum].setText(test.getText());
                 test.setText("test");
             }
-        }          
+        }
+        while(ButtonSpel.blandAgain(button)==true){
+            blandB(button);     //recursion
+        }        
     }
     public static void winButton(JButton[][] button){
         int total= 0;
@@ -57,5 +61,21 @@ public class ButtonSpel extends JFrame{
                 JOptionPane.showMessageDialog(null, "YOU WIN!!!!");
             }
         }           
+    }
+    public static boolean blandAgain(JButton[][] button){
+        int total= 0;
+        int number=0;        
+        for(int i=0; i<button.length; i++){
+            for(int j=0; j<button.length; j++){
+                number++;
+                String str = "" + number;
+                if(button[i][j].getText().equals(str))
+                    total++;
+            }
+            if(total == button.length*button.length -1){
+                return true;
+            }
+        }
+        return false;
     }
 }

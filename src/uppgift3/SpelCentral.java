@@ -21,27 +21,25 @@ public class SpelCentral extends JFrame implements ActionListener{
     JButton bland = new JButton("once again");
     JButton[][] button =null;
     public SpelCentral(int n){
-        button = ButtonSpel.createButton(n);
         totalP.setLayout(new BorderLayout());
         again.setLayout(new FlowLayout());
         again.add(bland);
-        JPanel pane = PanelSpel.cratePanel(n);
-        button[n-1][n-1].setText("");
-        for(int i=0; i<n; i++){
-            for(int j=0; j<n; j++){
-                pane.add(button[i][j]);
-            }
-        }
+        
+        button = ButtonSpel.createButton(n);
         ButtonSpel.blandB(button);
-        pane = PanelSpel.orderPanel(pane, n);
+        JPanel pane = PanelSpel.cratePanel(n);  //component=0
+        PanelSpel.paneAddBtn(pane, button, n);  //component=n*n
+        PanelSpel.orderPanel(pane, n);
+        
         for(int i=0; i<n; i++){
             for(int j=0; j<n; j++){
                 button[i][j].addActionListener(this);
             }
         }
-        bland.addActionListener(onceagain ->{
+        bland.addActionListener(onceagain ->{   //Lamda
             ButtonSpel.blandB(button);
         });
+        
         pane.setPreferredSize(new Dimension(500, 500));
         totalP.add(pane, BorderLayout.CENTER);
         totalP.add(again, BorderLayout.WEST);
