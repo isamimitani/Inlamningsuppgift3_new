@@ -84,7 +84,9 @@ public class BildSpel extends JFrame implements ActionListener{
     ImageIcon img11 = new ImageIcon(imnew11);
     ImageIcon imgsrc12 = new ImageIcon("src\\imgs\\num12.jpg");
     Image im12 = imgsrc12.getImage();
-    Image imnew12 = im12.getScaledInstance(wimg, himg, SCALE_SMOOTH);
+    int wwimg = 200;
+    int hhimg = 200;
+    Image imnew12 = im12.getScaledInstance(wwimg, hhimg, SCALE_SMOOTH);
     ImageIcon img12 = new ImageIcon(imnew12);
     ImageIcon imgsrc13 = new ImageIcon("src\\imgs\\num13.png");
     Image im13 = imgsrc13.getImage();
@@ -146,9 +148,10 @@ public class BildSpel extends JFrame implements ActionListener{
     
     JButton[] allButton = {pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8, pic9,
         pic10, pic11, pic12, pic13, pic14, pic15, pic16};
+    
 
     BildSpel(){
-
+        ButtonSpel.blandBPar(allButton);
         pimg.setLayout(new GridLayout(4, 4));
         for(int i=0; i<allButton.length; i++){
             allButton[i].setName("" + i);
