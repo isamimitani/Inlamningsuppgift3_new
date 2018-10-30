@@ -4,6 +4,7 @@
 package uppgift3;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -11,6 +12,8 @@ import static java.awt.Image.SCALE_SMOOTH;
 import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Random;
 import java.util.Vector;
 import javax.swing.Icon;
@@ -108,178 +111,90 @@ public class BildSpel extends JFrame implements ActionListener{
     JButton pic6 = new JButton(img6);
     JButton pic7 = new JButton(img7);
     JButton pic8 = new JButton(img8);
-    JButton pic9 = new JButton(img9);
-    JButton pic10 = new JButton(img10);
-    JButton pic11 = new JButton(img11);
-    JButton pic12 = new JButton(img12);
-    JButton pic13 = new JButton(img13);
-    JButton pic14 = new JButton(img14);
-    JButton pic15 = new JButton(img15);
-    JButton pic16 = new JButton(img16);
-    JButton testpic = new JButton(testimg);
-    JButton again = new JButton("Once again!");
+    JButton pic9 = new JButton(img1);
+    JButton pic10 = new JButton(img2);
+    JButton pic11 = new JButton(img3);
+    JButton pic12 = new JButton(img4);
+    JButton pic13 = new JButton(img5);
+    JButton pic14 = new JButton(img6);
+    JButton pic15 = new JButton(img7);
+    JButton pic16 = new JButton(img8);
+    JButton testb1 = new JButton(img10);
+    JButton testb2 = new JButton(img11);
+    JLabel test1 = new JLabel(img16);
+    JLabel test2 = new JLabel(img16);
+    JLabel test3 = new JLabel(img16);
+    JLabel test4 = new JLabel(img16);
+    JLabel test5 = new JLabel(img16);
+    JLabel test6 = new JLabel(img16);
+    JLabel test7 = new JLabel(img16);
+    JLabel test8 = new JLabel(img16);
+    JLabel test9 = new JLabel(img16);
+    JLabel test10 = new JLabel(img16);
+    JLabel test11 = new JLabel(img16);
+    JLabel test12 = new JLabel(img16);
+    JLabel test13 = new JLabel(img16);
+    JLabel test14 = new JLabel(img16);
+    JLabel test15 = new JLabel(img16);
+    JLabel test16 = new JLabel(img16);
+    JLabel testn1 = new JLabel(img10);
+    JLabel testn2 = new JLabel(img11);
+    JLabel[] testL = {test1, test2, test3, test4, test5, test6, test7, test8, 
+                      test9, test10, test11, test12, test13, test14, test15, test16};
+    JButton[] ettParB = {testb1, testb2};
+    int n =1;
+    
     JButton[] allButton = {pic1, pic2, pic3, pic4, pic5, pic6, pic7, pic8, pic9,
-        pic10, pic11, pic12, pic13, pic14, pic15, pic16, testpic};
-    ImageIcon[] bilder = {img1, img2, img3, img4, img5, img6, img7, img8, img9,
-        img10, img11, img12, img13, img14, img15, img16, testimg};
-    public void bland(){
-        Random ran = new Random();
-        for(int j=0; j<16; j++){
-            int rannum = ran.nextInt(16);
-            if(j == rannum)
-                continue;
-            allButton[16] = testpic;
-            allButton[16] = allButton[j];
-            allButton[j] = allButton[rannum];
-            allButton[rannum] = allButton[16];
-            allButton[16] = testpic;
-        }
-        for(int k =0; k<16; k++){
-            pimg.add(allButton[k]);
-        }
-    }
+        pic10, pic11, pic12, pic13, pic14, pic15, pic16};
+
     BildSpel(){
-        bland();
+
         pimg.setLayout(new GridLayout(4, 4));
-        pagain.setLayout(new FlowLayout());
-        pagain.add(again);
-        ptogether.setLayout(new BorderLayout());
-        ptogether.add(pagain, BorderLayout.WEST);
-        ptogether.add(pimg, BorderLayout.CENTER);
-        pimg.getComponent(0).setName("11");
-        pimg.getComponent(1).setName("12");
-        pimg.getComponent(2).setName("13");
-        pimg.getComponent(3).setName("14");
-        pimg.getComponent(4).setName("21");
-        pimg.getComponent(5).setName("22");
-        pimg.getComponent(6).setName("23");
-        pimg.getComponent(7).setName("24");
-        pimg.getComponent(8).setName("31");
-        pimg.getComponent(9).setName("32");
-        pimg.getComponent(10).setName("33");
-        pimg.getComponent(11).setName("34");
-        pimg.getComponent(12).setName("41");
-        pimg.getComponent(13).setName("42");
-        pimg.getComponent(14).setName("43");
-        pimg.getComponent(15).setName("44");
-        pagain.getComponent(0).setName("99");        
-        again.addActionListener(this);
-        pic1.addActionListener(this);
-        pic2.addActionListener(this);
-        pic3.addActionListener(this);
-        pic4.addActionListener(this);
-        pic5.addActionListener(this);
-        pic6.addActionListener(this);
-        pic7.addActionListener(this);
-        pic8.addActionListener(this);
-        pic9.addActionListener(this);
-        pic10.addActionListener(this);
-        pic11.addActionListener(this);
-        pic12.addActionListener(this);
-        pic13.addActionListener(this);
-        pic14.addActionListener(this);
-        pic15.addActionListener(this);
-        pic16.addActionListener(this);
+        for(int i=0; i<allButton.length; i++){
+            allButton[i].setName("" + i);
+            allButton[i].add(testL[i]);
+            pimg.add(allButton[i]);
+            allButton[i].addMouseListener(musLyss);
+        }
+        testb1.setName("100");
+        testb1.setName("200");
+        ptogether.add(pimg);
         f.add(ptogether);
         f.pack();
         f.setLocation(600, 50);
         f.setVisible(true);
         f.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String s = e.getSource().toString();
-        s = s.substring(20, 22);
-        int n = Integer.parseInt(s);
-        int m =0;
-        int upp=0;
-        int ner=0;
-        int left=0;
-        int right=0;
-        int y= 0;
-        for(int r=0; r<16; r++){
-            if((allButton[r].getIcon().toString()).equals(bilder[r].toString())){
-                y++;
-            }
-            if(y==15){
-                System.out.println("YOU WIN!!!");
-                JOptionPane.showMessageDialog(null, "YOU WIN!!!!");
-                System.exit(0);
-            }
+    MouseAdapter musLyss = new MouseAdapter() {
+
+        @Override
+        public void mouseReleased(MouseEvent e){
+            int t = Integer.parseInt(e.getComponent().getName().trim());
+            testL[t].setIcon(img16);
         }
-        if(n<50){
-            for(int i=0; i<16; i++){
-                if((allButton[i].getIcon().toString()).equals(img16.toString())){
-                    m = Integer.parseInt(allButton[i].getName());
-                    upp = m - 10;
-                    ner = m + 10;
-                    left = m - 1;
-                    right = m + 1;
-                    if(allButton[i].getName().startsWith("4")){
-                        if(n==left || n==right){
-                            allButton[i].setIcon(allButton[n-29].getIcon());
-                            allButton[n-29].setIcon(img16);
-                        }
-                        if(n==upp){
-                            allButton[i].setIcon(allButton[n-23].getIcon());
-                            allButton[n-23].setIcon(img16);
-                        }
-                    }
-                    if(allButton[i].getName().startsWith("3")){
-                        if(n==left || n==right){
-                            allButton[i].setIcon(allButton[n-23].getIcon());
-                            allButton[n-23].setIcon(img16);
-                        }
-                        if(n==upp){
-                            allButton[i].setIcon(allButton[n-17].getIcon());
-                            allButton[n-17].setIcon(img16);
-                        }
-                        if(n==ner){
-                            allButton[i].setIcon(allButton[n-29].getIcon());
-                            allButton[n-29].setIcon(img16);
-                        }
-                    }
-                    if(allButton[i].getName().startsWith("2")){
-                        if(n==left || n==right){
-                            allButton[i].setIcon(allButton[n-17].getIcon());
-                            allButton[n-17].setIcon(img16);
-                        }
-                        if(n==upp){
-                            allButton[i].setIcon(allButton[n-11].getIcon());
-                            allButton[n-11].setIcon(img16);
-                        }
-                        if(n==ner){
-                            allButton[i].setIcon(allButton[n-23].getIcon());
-                            allButton[n-23].setIcon(img16);
-                        }
-                    }
-                    if(allButton[i].getName().startsWith("1")){
-                        if(n==left || n==right){
-                            allButton[i].setIcon(allButton[n-11].getIcon());
-                            allButton[n-11].setIcon(img16);
-                        }
-                        if(n==ner){
-                            allButton[i].setIcon(allButton[n-17].getIcon());
-                            allButton[n-17].setIcon(img16);
-                        }
-                    }
+        
+        @Override
+        public void mousePressed(MouseEvent e){
+            int t = Integer.parseInt(e.getComponent().getName().trim());
+            testL[t].setIcon(allButton[t].getIcon());
+            int m = n%2;
+            n++;
+            ettParB[m] = allButton[t];
+            if(ettParB[0].getIcon().equals(ettParB[1].getIcon()) &&
+                    (allButton[t].equals(ettParB[0]) ^ allButton[t].equals(ettParB[1]))){
+                allButton[t].remove(testL[t]);
+                for(int i=0; i<allButton.length; i++){
+                    if(i != t && allButton[i].getIcon().equals(allButton[t].getIcon()))
+                        allButton[i].remove(testL[i]);
                 }
             }
         }
-        if(n == 99){
-            Random ran = new Random();
-            for(int j=0; j<16; j++){
-                int rannum = ran.nextInt(16);
-                if(j == rannum)
-                    continue;
-                allButton[16].setIcon(testimg);
-                allButton[16].setIcon(allButton[j].getIcon());
-                allButton[j].setIcon(allButton[rannum].getIcon());
-                allButton[rannum].setIcon(allButton[16].getIcon());
-                allButton[16].setIcon(testimg);
-            }  
-        }
-    }    
+    };     
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+    }
 }
     
 
