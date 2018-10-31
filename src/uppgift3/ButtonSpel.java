@@ -1,5 +1,6 @@
 package uppgift3;
 
+import java.awt.Font;
 import java.util.Random;
 import javax.swing.*;
 
@@ -16,10 +17,13 @@ public class ButtonSpel extends JFrame{
             for(int j=0; j<n; j++){
                 tt++;
                 String ss = "" + tt;
-                if(!(i== n-1 && j == n-1))
+                if(!(i== n-1 && j == n-1)){
                     button[i][j] = new JButton(ss);
-                else
+                    button[i][j].setFont(new Font("Arial", Font.PLAIN, 40));
+                } else {
                     button[i][j] = new JButton("");
+                    button[i][j].setFont(new Font("Arial", Font.PLAIN, 40));
+                }
                 
             }
         }
