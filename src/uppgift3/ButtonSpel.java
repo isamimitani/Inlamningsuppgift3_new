@@ -1,6 +1,5 @@
 package uppgift3;
-import java.awt.List;
-import java.util.ArrayList;
+
 import java.util.Random;
 import javax.swing.*;
 
@@ -9,7 +8,6 @@ import javax.swing.*;
  * @author Julia
  */
 public class ButtonSpel extends JFrame{
-    public static JButton test = new JButton("test");
 
     public static JButton[][] createButton(int n){
         JButton[][] button = new JButton[n][n];
@@ -18,29 +16,33 @@ public class ButtonSpel extends JFrame{
             for(int j=0; j<n; j++){
                 tt++;
                 String ss = "" + tt;
-                button[i][j] = new JButton(ss);
+                if(!(i== n-1 && j == n-1))
+                    button[i][j] = new JButton(ss);
+                else
+                    button[i][j] = new JButton("");
+                
             }
         }
         return button;
     }
-    public static void blandB(JButton[][] button){
+    public static void blandButton(JButton[][] button){
         Random rani = new Random();
-        Random ranj = new Random();
+        JButton tmp = new JButton("tmp");
+
         for(int i=0; i<button.length; i++){
             int raninum = rani.nextInt(button.length);
             for(int j=0; j<button.length; j++){
-                int ranjnum = ranj.nextInt(button.length);
+                int ranjnum = rani.nextInt(button.length);
                 if(i==raninum && j==ranjnum)
                     continue;
-                test.setText("test");
-                test.setText(button[i][j].getText());
+
+                tmp.setText(button[i][j].getText());
                 button[i][j].setText(button[raninum][ranjnum].getText());
-                button[raninum][ranjnum].setText(test.getText());
-                test.setText("test");
+                button[raninum][ranjnum].setText(tmp.getText());
             }
         }          
     }
-    public static void winButton(JButton[][] button){
+    public static boolean winButton(JButton[][] button){
         int total= 0;
         int number=0;        
         for(int i=0; i<button.length; i++){
@@ -51,8 +53,9 @@ public class ButtonSpel extends JFrame{
                     total++;
             }
             if(total == button.length*button.length -1){
-                JOptionPane.showMessageDialog(null, "YOU WIN!!!!");
+                return true;
             }
-        }           
+        }
+        return false;
     }
 }

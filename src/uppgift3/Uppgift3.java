@@ -1,5 +1,5 @@
-
 package uppgift3;
+
 import javax.swing.*;
 
 /**
@@ -10,6 +10,7 @@ import javax.swing.*;
  * @author julia
  */
 public class Uppgift3 {
+    
     public Uppgift3(){
         boolean again = true;
         int row = 0;
@@ -24,17 +25,23 @@ public class Uppgift3 {
                 else{
                     input = JOptionPane.showInputDialog("Write number 2 to 10 !");
                     again = true;
-                }
-                    
+                }        
             }
-            catch(Exception exc){
+            catch(NumberFormatException exc){
                 input = JOptionPane.showInputDialog("Write number 2 to 10 !");
                 again = true;
             }
         }
+        
         SpelCentral sc = new SpelCentral(row);
     }
+    
     public static void main(String[] args) {
-        Uppgift3 play = new Uppgift3();
+
+        SwingUtilities.invokeLater(new Runnable(){
+            public void run(){
+                new Uppgift3();
+            }    
+        });
     }
 }

@@ -2,12 +2,12 @@
  * Java
  */
 package uppgift3;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
 import javax.swing.*;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
@@ -16,46 +16,52 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
  * @author Julia
  */
 public class SpelCentral extends JFrame implements ActionListener{
-    JFrame fram = new JFrame();
+
+    JFrame frame = new JFrame();
     JPanel totalP = new JPanel();
     JPanel again = new JPanel();
-    JButton bland = new JButton("once again");
-    JButton[][] button =null;
+    JPanel pane;
+    JButton shuffle = new JButton("Nytt spel");
+    JButton[][] button = null;
+    
     public SpelCentral(int n){
         button = ButtonSpel.createButton(n);
         totalP.setLayout(new BorderLayout());
         again.setLayout(new FlowLayout());
-        again.add(bland);
-        JPanel pane = PanelSpel.cratePanel(n);
-        button[n-1][n-1].setText("");
+        again.add(shuffle);
+        pane = PanelSpel.cratePanel(n);
+
         for(int i=0; i<n; i++){
             for(int j=0; j<n; j++){
                 pane.add(button[i][j]);
             }
         }
-        ButtonSpel.blandB(button);
+        ButtonSpel.blandButton(button);
         pane = PanelSpel.orderPanel(pane, n);
         for(int i=0; i<n; i++){
             for(int j=0; j<n; j++){
                 button[i][j].addActionListener(this);
             }
         }
-        bland.addActionListener(onceagain ->{   //Lamda
-            ButtonSpel.blandB(button);
+        shuffle.addActionListener(onceagain ->{   //Lamda
+            ButtonSpel.blandButton(button);
+            pane.setVisible(true);
         });
         pane.setPreferredSize(new Dimension(500, 500));
         totalP.add(pane, BorderLayout.CENTER);
         totalP.add(again, BorderLayout.WEST);
-        fram.add(totalP);
-        fram.pack();
-        fram.setLocation(600, 50);
-        fram.setVisible(true);
-        fram.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        frame.add(totalP);
+        frame.pack();
+        frame.setLocation(600, 50);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
     }   //konstruktur
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         String s = e.getSource().toString();
+        System.out.println(s);
         s = s.substring(20, 23);
         int n = Integer.parseInt(s);
         int m =0;
@@ -106,6 +112,9 @@ public class SpelCentral extends JFrame implements ActionListener{
                 }
             }
         }
-        ButtonSpel.winButton(button);          
+        if(ButtonSpel.winButton(button)){
+            JOptionPane.showMessageDialog(null, "Grattis, du vann!");
+            pane.setVisible(false);
+        }
     }
 }
