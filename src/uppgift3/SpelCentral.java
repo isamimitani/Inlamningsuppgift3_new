@@ -35,18 +35,25 @@ public class SpelCentral extends JFrame implements ActionListener{
             for(int j=0; j<n; j++){
                 pane.add(button[i][j]);
             }
-        }
-        ButtonSpel.blandButton(button);
+        }      
+        do{
+            ButtonSpel.blandButton(button);
+        } while((!ButtonSpel.isSolvable(button)) || ButtonSpel.winButton(button));
+              
         pane = PanelSpel.orderPanel(pane, n);
         for(int i=0; i<n; i++){
             for(int j=0; j<n; j++){
                 button[i][j].addActionListener(this);
             }
         }
+        
         shuffle.addActionListener(onceagain ->{   //Lamda
-            ButtonSpel.blandButton(button);
+            do{
+                ButtonSpel.blandButton(button);
+            } while((!ButtonSpel.isSolvable(button)) || ButtonSpel.winButton(button));
             pane.setVisible(true);
         });
+        
         pane.setPreferredSize(new Dimension(500, 500));
         totalP.add(pane, BorderLayout.CENTER);
         totalP.add(again, BorderLayout.WEST);

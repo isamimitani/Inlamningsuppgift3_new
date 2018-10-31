@@ -62,4 +62,47 @@ public class ButtonSpel extends JFrame{
         }
         return false;
     }
+    
+    public static boolean isSolvable(JButton[][] button){
+        int parity = 0;
+        int gridWidth = button.length;
+        int row = 0;
+        int blankRow = 0;
+        
+        JButton[] bArray = new JButton[gridWidth*gridWidth];
+        int count=0;
+        for(int i=0; i<gridWidth; i++){
+            for(int j=0; j<gridWidth; j++){
+                bArray[count] = button[i][j];
+                count++;
+            }
+        }
+        
+        for(int i=0; i<bArray.length; i++){
+            if(i%gridWidth == 0){
+                row++;
+            }
+            if(bArray[i].getText().equals("")){
+                blankRow = row;
+                continue;
+            }
+            for(int j=i+1; j<bArray.length; j++){
+                if(bArray[i].getText().compareTo(bArray[j].getText()) > 0 
+                        && !bArray[j].getText().equals("")){
+                    parity++;
+                }
+            }
+        }
+        
+        if(gridWidth % 2 == 0){
+            if(blankRow % 2 == 0){
+                return parity % 2 == 0;
+            } else {
+                return parity % 2 != 0;
+            }
+        } else {
+            return parity % 2 == 0;
+        }
+
+    }
 }
