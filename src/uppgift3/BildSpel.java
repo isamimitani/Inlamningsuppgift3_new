@@ -151,7 +151,7 @@ public class BildSpel extends JFrame implements ActionListener{
     
 
     BildSpel(){
-        ButtonSpel.blandBPar(allButton);
+//        ButtonSpel.blandBPar(allButton);
         pimg.setLayout(new GridLayout(4, 4));
         for(int i=0; i<allButton.length; i++){
             allButton[i].setName("" + i);
@@ -198,6 +198,6 @@ public class BildSpel extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         
     }
-}
+} 
     
 

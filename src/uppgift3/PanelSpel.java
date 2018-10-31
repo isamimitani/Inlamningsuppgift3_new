@@ -1,27 +1,20 @@
-/*
- * Java
- */
+
 package uppgift3;
+
 import java.awt.GridLayout;
 import javax.swing.*;
-
 /**
  *
  * @author Julia
  */
 public class PanelSpel extends JFrame{
+    
     public static JPanel cratePanel(int n){
         JPanel p = new JPanel();
         p.setLayout(new GridLayout(n, n));
         return p;
     }
-    public static void paneAddBtn(JPanel panel, JButton[][] button, int n){
-        for(int i=0; i<n; i++){
-            for(int j=0; j<n; j++){
-                panel.add(button[i][j]);
-            }
-        }
-    }
+    
     public static JPanel orderPanel(JPanel panel, int n){
         String[][] orderP = new String[n][n];
         int index = 0;
