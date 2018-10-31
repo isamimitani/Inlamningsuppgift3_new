@@ -91,7 +91,7 @@ public class ButtonSpel extends JFrame{
                         && !bArray[j].getText().equals("")){
                     parity++;
                 }
-            }
+            } 
         }
         
         if(gridWidth % 2 == 0){
