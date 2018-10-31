@@ -19,10 +19,10 @@ public class ButtonSpel extends JFrame{
                 String ss = "" + tt;
                 if(!(i== n-1 && j == n-1)){
                     button[i][j] = new JButton(ss);
-                    button[i][j].setFont(new Font("Arial", Font.PLAIN, 40));
+                    button[i][j].setFont(new Font("Arial", Font.PLAIN, 20));
                 } else {
                     button[i][j] = new JButton("");
-                    button[i][j].setFont(new Font("Arial", Font.PLAIN, 40));
+                    button[i][j].setFont(new Font("Arial", Font.PLAIN, 20));
                 }
                 
             }
@@ -77,7 +77,7 @@ public class ButtonSpel extends JFrame{
                 count++;
             }
         }
-        
+         
         for(int i=0; i<bArray.length; i++){
             if(i%gridWidth == 0){
                 row++;

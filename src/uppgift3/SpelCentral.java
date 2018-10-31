@@ -7,6 +7,7 @@ package uppgift3;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -21,7 +22,7 @@ public class SpelCentral extends JFrame implements ActionListener{
     JFrame frame = new JFrame();
     JPanel totalP = new JPanel();
     JPanel again = new JPanel();
-    JPanel pane;
+    JPanel pane = new JPanel();
     JButton shuffle = new JButton("Nytt spel");
     JButton[][] button = null;
     
@@ -30,8 +31,7 @@ public class SpelCentral extends JFrame implements ActionListener{
         totalP.setLayout(new BorderLayout());
         again.setLayout(new FlowLayout());
         again.add(shuffle);
-        pane = PanelSpel.cratePanel(n);
-
+        pane.setLayout(new GridLayout(n, n));
         for(int i=0; i<n; i++){
             for(int j=0; j<n; j++){
                 pane.add(button[i][j]);
@@ -41,7 +41,6 @@ public class SpelCentral extends JFrame implements ActionListener{
             ButtonSpel.blandButton(button);
         } while((!ButtonSpel.isSolvable(button)) || ButtonSpel.winButton(button));
               
-        pane = PanelSpel.orderPanel(pane, n);
         for(int i=0; i<n; i++){
             for(int j=0; j<n; j++){
                 button[i][j].addActionListener(this);
@@ -55,7 +54,7 @@ public class SpelCentral extends JFrame implements ActionListener{
             pane.setVisible(true);
         });
         
-        pane.setPreferredSize(new Dimension(500, 500));
+        pane.setPreferredSize(new Dimension(600, 600));
         totalP.add(pane, BorderLayout.CENTER);
         totalP.add(again, BorderLayout.WEST);
         frame.add(totalP);
@@ -68,58 +67,45 @@ public class SpelCentral extends JFrame implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        String s = e.getSource().toString();
-        System.out.println(s);
-        s = s.substring(20, 23);
-        int n = Integer.parseInt(s);
-        int m =0;
-        int upp=0;
-        int ner=0;
-        int left=0;
-        int right=0;
-        if(n>=100 && n<500){
-            for(int i=0; i<button.length; i++){
-                for(int j=0; j<button.length; j++){
-                    if(button[i][j].getText().equals("")){
-                        m = Integer.parseInt(button[i][j].getName());
-                        left = Integer.parseInt(button[i][0].getName());
-                        right = Integer.parseInt(button[i][button.length-1].getName());
-                        while(n>=left && n<m){
-                            button[i][j].setText(button[i][--j].getText());
-                            button[i][j].setText("");
-                            n++;
-                        }
-                        while(n>m && n<=right){
-                            button[i][j].setText(button[i][++j].getText());
-                            button[i][j].setText("");
-                            n--;
-                        }
-                        if(n>right){
-                            for(int k=i+1; k<button.length; k++){
-                                ner=Integer.parseInt(button[k][j].getName()); 
-                                if(n==ner){
-                                    for(int p=i; p<k; p++){
-                                        button[p][j].setText(button[p+1][j].getText());
-                                        button[p+1][j].setText("");
-                                    }
-                                }
+        JButton jb = (JButton) e.getSource();
+        for(int i=0; i<button.length; i++){
+            for(int j=0; j<button.length; j++){
+                if(button[i][j].getText().equals("")){
+                    for(int k=0; k<j; k++){     //e ligger left
+                        if(button[i][k].getText().equals(jb.getText())){
+                            while(k<j){
+                                button[i][j].setText(button[i][--j].getText());
+                                button[i][j].setText("");
                             }
                         }
-                        if(n<left){
-                            for(int k=i-1; k>=0; k--){
-                                upp=Integer.parseInt(button[k][j].getName()); 
-                                if(n==upp){
-                                    for(int p=i; p>k; p--){
-                                        button[p][j].setText(button[p-1][j].getText());
-                                        button[p-1][j].setText("");
-                                    }
-                                }
+                    }
+                    for(int k=j+1; k<button.length; k++){     //e ligger right
+                        if(button[i][k].getText().equals(jb.getText())){
+                            for(int q=j; q<k;){
+                                button[i][q].setText(button[i][++q].getText());
+                                button[i][q].setText("");
+                            }
+                        }
+                    }
+                    for(int k=0; k<i; k++){     //e ligger uppe
+                        if(button[k][j].getText().equals(jb.getText())){
+                            while(k<i){
+                                button[i][j].setText(button[--i][j].getText());
+                                button[i][j].setText("");
+                            }
+                        }
+                    }
+                    for(int k=i+1; k<button.length; k++){     //e ligger nere
+                        if(button[k][j].getText().equals(jb.getText())){
+                            while(i<k){
+                                button[i][j].setText(button[++i][j].getText());
+                                button[i][j].setText("");
                             }
                         }
                     }
                 }
             }
-        }
+        }  
         if(ButtonSpel.winButton(button)){
             JOptionPane.showMessageDialog(null, "Grattis, du vann!");
             pane.setVisible(false);
