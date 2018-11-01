@@ -64,7 +64,7 @@ public class SpelCentral extends JFrame implements ActionListener{
                 ButtonSpel.changeColor(button);
         });
         
-        pane.setPreferredSize(new Dimension(500, 500));
+        pane.setPreferredSize(new Dimension(600, 600));
         totalP.add(pane, BorderLayout.CENTER);
         totalP.add(again, BorderLayout.WEST);
         

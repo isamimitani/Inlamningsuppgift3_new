@@ -46,9 +46,7 @@ public class ImagePlayer extends SwingWorker{
          
         try {
             URL url = new URL(imageUrlList.get(0));
-            icon = new ImageIcon(url);
-            image = icon.getImage().getScaledInstance(500, 150, Image.SCALE_SMOOTH);
-            icon = new ImageIcon(image);
+            icon = getImageIcon(url);
         } catch (MalformedURLException ex) {
             Logger.getLogger(ImagePlayer.class.getName()).log(Level.SEVERE, null, ex);
         }    
@@ -68,9 +66,7 @@ public class ImagePlayer extends SwingWorker{
                     count = 0;
                 try {
                     URL url = new URL(imageUrlList.get(count));
-                    icon = new ImageIcon(url);
-                    image = icon.getImage().getScaledInstance(500, 150, Image.SCALE_SMOOTH);
-                    icon = new ImageIcon(image);
+                    icon = getImageIcon(url);
                 } catch (MalformedURLException ex) {
                     Logger.getLogger(ImagePlayer.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -81,6 +77,13 @@ public class ImagePlayer extends SwingWorker{
         };
         new Timer(delay, taskPerformer).start();
         return "";
+    }
+    
+    public static ImageIcon getImageIcon(URL url){
+        ImageIcon icon = new ImageIcon(url);
+        Image image = icon.getImage().getScaledInstance(600, 150, Image.SCALE_SMOOTH);
+        icon = new ImageIcon(image);
+        return icon;
     }
     
 }
