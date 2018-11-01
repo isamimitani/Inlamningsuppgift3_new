@@ -2,15 +2,7 @@ package uppgift3;
 
 import javax.swing.*;
 
-/**
- *
- * blanda first or you win first?
- * hur kan funkar for bild
- * Sen ska försöka använda CSS
- * @author julia
- */
 public class Uppgift3 {
-    
     public Uppgift3(){
         boolean again = true;
         int row = 0;
@@ -35,13 +27,8 @@ public class Uppgift3 {
         
         SpelCentral sc = new SpelCentral(row);
     }
-    
     public static void main(String[] args) {
-
-        SwingUtilities.invokeLater(new Runnable(){
-            public void run(){
-                new Uppgift3();
-            }    
-        });
+        Uppgift3 play = new Uppgift3();
+    
     }
 }

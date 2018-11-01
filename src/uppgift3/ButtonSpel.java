@@ -78,7 +78,7 @@ public class ButtonSpel extends JFrame{
                 count++;
             }
         }
-        
+         
         for(int i=0; i<bArray.length; i++){
             if(i%gridWidth == 0){
                 row++;
@@ -92,7 +92,7 @@ public class ButtonSpel extends JFrame{
                         && !bArray[j].getText().equals("")){
                     parity++;
                 }
-            }
+            } 
         }
         
         if(gridWidth % 2 == 0){
