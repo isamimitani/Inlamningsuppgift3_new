@@ -28,7 +28,10 @@ public class Uppgift3 {
         SpelCentral sc = new SpelCentral(row);
     }
     public static void main(String[] args) {
-        Uppgift3 play = new Uppgift3();
-    
+        SwingUtilities.invokeLater(new Runnable(){
+            public void run(){
+                new Uppgift3();
+            }    
+        });  
     }
 }
