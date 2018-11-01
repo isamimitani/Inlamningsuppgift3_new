@@ -5,11 +5,14 @@ package uppgift3;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -22,13 +25,16 @@ public class SpelCentral extends JFrame implements ActionListener{
     JPanel again = new JPanel();
     JPanel pane;
     JButton shuffle = new JButton("Nytt spel");
+    JButton color = new JButton("Byt färg");
     JButton[][] button = null;
     
     public SpelCentral(int n){
         button = ButtonSpel.createButton(n);
         totalP.setLayout(new BorderLayout());
-        again.setLayout(new FlowLayout());
+        again.setLayout(new GridLayout(10,1));
+        again.setBorder(new EmptyBorder(5,5,5,5));
         again.add(shuffle);
+        again.add(color);
         pane = PanelSpel.cratePanel(n);
 
         for(int i=0; i<n; i++){
@@ -54,14 +60,28 @@ public class SpelCentral extends JFrame implements ActionListener{
             pane.setVisible(true);
         });
         
+        color.addActionListener(ae ->{   //Lamda
+                ButtonSpel.changeColor(button);
+        });
+        
         pane.setPreferredSize(new Dimension(500, 500));
         totalP.add(pane, BorderLayout.CENTER);
         totalP.add(again, BorderLayout.WEST);
+        
+        ImagePlayer ip = new ImagePlayer();
+        totalP.add(ip.imagePanel, BorderLayout.SOUTH);
+        
         frame.add(totalP);
         frame.pack();
         frame.setLocation(600, 50);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
+        try {
+            ip.doInBackground();
+        } catch (Exception ex) {
+            Logger.getLogger(SpelCentral.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }   //konstruktur
     

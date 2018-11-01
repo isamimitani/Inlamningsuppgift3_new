@@ -1,5 +1,6 @@
 package uppgift3;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.util.Random;
 import javax.swing.*;
@@ -104,5 +105,16 @@ public class ButtonSpel extends JFrame{
             return parity % 2 == 0;
         }
 
+    }
+    
+    public static void changeColor(JButton[][] button){
+        Random rand = new Random();
+        Color newColor;
+        newColor = new Color(rand.nextFloat(), rand.nextFloat(), rand.nextFloat());
+        for(int i=0; i<button.length; i++){
+            for(int j=0; j<button.length; j++){
+                button[i][j].setBackground(newColor);
+            }
+        }
     }
 }
