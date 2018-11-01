@@ -26,33 +26,34 @@ public class ImagePlayer extends SwingWorker{
     
     JPanel imagePanel = new JPanel();
     ImageIcon icon;
-    List<ImageIcon> imageicons = new ArrayList<>();
+    Image image;
+    List<String> imageUrlList = new ArrayList<>();
     JLabel imagelabel;
+    final String filePath = "src\\uppgift3\\image_url.txt";
     int count = 0;
 
     public ImagePlayer(){
         
-        Image image;
-        
         Scanner sc = null;
         try {
-            sc = new Scanner(new File("src\\uppgift3\\image_url.txt"));
+            sc = new Scanner(new File(filePath)); 
+                while(sc.hasNextLine()){
+                    imageUrlList.add(sc.nextLine()); 
+                }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(ImagePlayer.class.getName()).log(Level.SEVERE, null, ex);
         }
-        while(sc.hasNextLine()){           
-            try {
-                URL url = new URL(sc.nextLine());
-                icon = new ImageIcon(url);
-                image = icon.getImage().getScaledInstance(500, 150, Image.SCALE_SMOOTH);
-                icon = new ImageIcon(image);
-                imageicons.add(icon);
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(ImagePlayer.class.getName()).log(Level.SEVERE, null, ex);
-            }    
-        }
-
-        imagelabel = new JLabel(imageicons.get(0));
+         
+        try {
+            URL url = new URL(imageUrlList.get(0));
+            icon = new ImageIcon(url);
+            image = icon.getImage().getScaledInstance(500, 150, Image.SCALE_SMOOTH);
+            icon = new ImageIcon(image);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ImagePlayer.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+        
+        imagelabel = new JLabel(icon);
         imagePanel.add(imagelabel);
         count++;
     }
@@ -63,9 +64,18 @@ public class ImagePlayer extends SwingWorker{
 
         ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                if(count%imageicons.size() == 0)
+                if(count%imageUrlList.size() == 0)
                     count = 0;
-                imagelabel.setIcon(imageicons.get(count));
+                try {
+                    URL url = new URL(imageUrlList.get(count));
+                    icon = new ImageIcon(url);
+                    image = icon.getImage().getScaledInstance(500, 150, Image.SCALE_SMOOTH);
+                    icon = new ImageIcon(image);
+                } catch (MalformedURLException ex) {
+                    Logger.getLogger(ImagePlayer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                imagelabel.setIcon(icon);
                 count++;
             }
         };
